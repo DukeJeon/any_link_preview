@@ -49,34 +49,36 @@ class LinkViewVertical extends StatelessWidget {
 
     return InkWell(
         onTap: () => onTap(),
-        child: Column(
-          children: <Widget>[
-            showMultiMedia!
-                ? Expanded(
-                    flex: 2,
-                    child: imageProvider == null
-                        ? Container(color: bgColor ?? Colors.grey)
-                        : Container(
-                            padding: EdgeInsets.only(bottom: 15),
-                            decoration: BoxDecoration(
-                              borderRadius: radius == 0
-                                  ? BorderRadius.zero
-                                  : BorderRadius.only(
-                                      topLeft: Radius.circular(radius),
-                                      topRight: Radius.circular(radius),
-                                    ),
-                              image: DecorationImage(
-                                image: imageProvider!,
-                                fit: BoxFit.fitWidth,
+        child: IntrinsicHeight(
+          child: Column(
+            children: <Widget>[
+              showMultiMedia!
+                  ? Expanded(
+                      flex: 2,
+                      child: imageProvider == null
+                          ? Container(color: bgColor ?? Colors.grey)
+                          : Container(
+                              padding: EdgeInsets.only(bottom: 15),
+                              decoration: BoxDecoration(
+                                borderRadius: radius == 0
+                                    ? BorderRadius.zero
+                                    : BorderRadius.only(
+                                        topLeft: Radius.circular(radius),
+                                        topRight: Radius.circular(radius),
+                                      ),
+                                image: DecorationImage(
+                                  image: imageProvider!,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
-                          ),
-                  )
-                : SizedBox(height: 5),
-            _buildTitleContainer(
-                titleTS_, titleMaxLines),
-            _buildBodyContainer(bodyTS_, bodyMaxLines),
-          ],
+                    )
+                  : SizedBox(height: 5),
+              _buildTitleContainer(
+                  titleTS_, titleMaxLines),
+              _buildBodyContainer(bodyTS_, bodyMaxLines),
+            ],
+          ),
         ));
   }
 
