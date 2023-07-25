@@ -61,6 +61,7 @@ class AnyLinkPreview extends StatefulWidget {
   /// Give the limit to body text (Description)
   /// Defaults to `3`
   final int bodyMaxLines;
+  final int titleMaxLines;
 
   /// Cache result time, default cache `1 day`
   /// Pass `null` to disable or to fetch latest
@@ -117,6 +118,7 @@ class AnyLinkPreview extends StatefulWidget {
     this.showMultimedia = true,
     this.backgroundColor = const Color.fromRGBO(235, 235, 235, 1),
     this.bodyMaxLines = 3,
+    this.titleMaxLines = 1,
     this.bodyTextOverflow = TextOverflow.ellipsis,
     this.placeholderWidget,
     this.errorWidget,
@@ -140,17 +142,18 @@ class AnyLinkPreview extends StatefulWidget {
     required this.link,
     required this.itemBuilder,
     this.cache = const Duration(days: 1),
-    this.padding = EdgeInsets.zero,
     this.placeholderWidget,
     this.errorWidget,
     this.proxyUrl,
     this.headers,
   })  : titleStyle = null,
         bodyStyle = null,
+        padding = EdgeInsets.zero,
         displayDirection = UIDirection.uiDirectionVertical,
         showMultimedia = true,
         backgroundColor = null,
         bodyMaxLines = 3,
+        titleMaxLines = 1,
         bodyTextOverflow = TextOverflow.ellipsis,
         borderRadius = null,
         errorBody = null,
@@ -375,6 +378,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
               titleTextStyle: widget.titleStyle,
               bodyTextStyle: widget.bodyStyle,
               bodyTextOverflow: widget.bodyTextOverflow,
+              titleMaxLines: widget.titleMaxLines,
               bodyMaxLines: widget.bodyMaxLines,
               showMultiMedia: widget.showMultimedia,
               bgColor: widget.backgroundColor,

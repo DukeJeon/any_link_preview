@@ -11,6 +11,7 @@ class LinkViewVertical extends StatelessWidget {
   final bool? showMultiMedia;
   final TextOverflow? bodyTextOverflow;
   final int? bodyMaxLines;
+  final int? titleMaxLines;
   final double radius;
   final Color? bgColor;
 
@@ -26,25 +27,10 @@ class LinkViewVertical extends StatelessWidget {
     this.showMultiMedia,
     this.bodyTextOverflow,
     this.bodyMaxLines,
+    this.titleMaxLines,
     this.bgColor,
     this.radius = 0
   }) : super(key: key);
-
-  double computeTitleFontSize(double height) {
-    var size = height * 0.13;
-    if (size > 15) {
-      size = 15;
-    }
-    return size;
-  }
-
-  int computeTitleLines(layoutHeight, layoutWidth) {
-    return layoutHeight - layoutWidth < 50 ? 1 : 2;
-  }
-
-  int? computeBodyLines(layoutHeight) {
-    return layoutHeight ~/ 60 == 0 ? 1 : layoutHeight ~/ 60;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +40,13 @@ class LinkViewVertical extends StatelessWidget {
 
       var titleTS_ = titleTextStyle ??
           TextStyle(
-            fontSize: computeTitleFontSize(layoutHeight),
+            fontSize: 16,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           );
       var bodyTS_ = bodyTextStyle ??
           TextStyle(
-            fontSize: computeTitleFontSize(layoutHeight) - 1,
+            fontSize: 12,
             color: Colors.grey,
             fontWeight: FontWeight.w400,
           );
@@ -92,8 +78,8 @@ class LinkViewVertical extends StatelessWidget {
                     )
                   : SizedBox(height: 5),
               _buildTitleContainer(
-                  titleTS_, computeTitleLines(layoutHeight, layoutWidth)),
-              _buildBodyContainer(bodyTS_, computeBodyLines(layoutHeight)),
+                  titleTS_, titleMaxLines),
+              _buildBodyContainer(bodyTS_, bodyMaxLines),
             ],
           ));
     });
