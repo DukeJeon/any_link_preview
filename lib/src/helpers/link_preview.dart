@@ -105,6 +105,7 @@ class AnyLinkPreview extends StatefulWidget {
   /// Function only in [AnyLinkPreview.builder]
   /// allows to build a custom [Widget] from the [Metadata] and [ImageProvider] fetched
   final Widget Function(BuildContext, Metadata, ImageProvider?)? itemBuilder;
+  final EdgeInsets padding;
 
   AnyLinkPreview({
     Key? key,
@@ -129,6 +130,7 @@ class AnyLinkPreview extends StatefulWidget {
     this.headers,
     this.onTap,
     this.previewHeight,
+    this.padding = EdgeInsets.zero,
     this.urlLaunchMode = LaunchMode.platformDefault,
   })  : itemBuilder = null,
         super(key: key);
@@ -138,6 +140,7 @@ class AnyLinkPreview extends StatefulWidget {
     required this.link,
     required this.itemBuilder,
     this.cache = const Duration(days: 1),
+    this.padding = EdgeInsets.zero,
     this.placeholderWidget,
     this.errorWidget,
     this.proxyUrl,
@@ -305,9 +308,9 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
     }
   }
 
-  Widget _buildPlaceHolder(double defaultHeight) {
+  Widget _buildPlaceHolder() {
     return Container(
-      height: defaultHeight,
+      padding: widget.padding,
       child: LayoutBuilder(builder: (context, constraints) {
         var layoutWidth = constraints.biggest.width;
         var layoutHeight = constraints.biggest.height;
@@ -321,7 +324,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
     );
   }
 
-  Widget _buildLinkContainer(double height, Metadata info) {
+  Widget _buildLinkContainer(Metadata info) {
     final image = LinkAnalyzer.isNotEmpty(info.image)
         ? ((widget.proxyUrl ?? '') + (info.image ?? ''))
         : null;
@@ -336,6 +339,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
     final imageProvider = _buildImageProvider(image ?? _errorImage);
 
     return Container(
+      padding: widget.padding,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
         borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
@@ -344,7 +348,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
             : widget.boxShadow ??
                 [BoxShadow(blurRadius: 3, color: Colors.grey)],
       ),
-      height: height,
+      // height: height,
       child: (widget.displayDirection == UIDirection.uiDirectionHorizontal)
           ? LinkViewHorizontal(
               key: widget.key ?? Key(originalLink.toString()),
@@ -398,14 +402,14 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
   @override
   Widget build(BuildContext context) {
     final info = _info as Metadata?;
-    var height = widget.previewHeight ??
-        ((widget.displayDirection == UIDirection.uiDirectionHorizontal ||
-                !widget.showMultimedia)
-            ? ((MediaQuery.of(context).size.height) * 0.15)
-            : ((MediaQuery.of(context).size.height) * 0.25));
+    // var height = widget.previewHeight ??
+    //     ((widget.displayDirection == UIDirection.uiDirectionHorizontal ||
+    //             !widget.showMultimedia)
+    //         ? ((MediaQuery.of(context).size.height) * 0.15)
+    //         : ((MediaQuery.of(context).size.height) * 0.25));
 
     Widget loadingErrorWidget = Container(
-      height: height,
+      // height: height,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
@@ -428,7 +432,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
     }
 
     return info == null
-        ? widget.errorWidget ?? _buildPlaceHolder(height)
-        : _buildLinkContainer(height, info);
+        ? widget.errorWidget ?? _buildPlaceHolder()
+        : _buildLinkContainer(info);
   }
 }
