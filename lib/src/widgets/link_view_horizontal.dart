@@ -11,7 +11,7 @@ class LinkViewHorizontal extends StatelessWidget {
   final bool? showMultiMedia;
   final TextOverflow? bodyTextOverflow;
   final int? bodyMaxLines;
-  final double? radius;
+  final double radius;
   final Color? bgColor;
 
   LinkViewHorizontal({
@@ -27,7 +27,7 @@ class LinkViewHorizontal extends StatelessWidget {
     this.bodyTextOverflow,
     this.bodyMaxLines,
     this.bgColor,
-    this.radius,
+    this.radius = 0,
   }) : super(key: key);
 
   double computeTitleFontSize(double width) {
@@ -89,8 +89,8 @@ class LinkViewHorizontal extends StatelessWidget {
                                 borderRadius: radius == 0
                                     ? BorderRadius.zero
                                     : BorderRadius.only(
-                                        topLeft: Radius.circular(radius!),
-                                        bottomLeft: Radius.circular(radius!),
+                                        topLeft: Radius.circular(radius),
+                                        bottomLeft: Radius.circular(radius),
                                       ),
                               ),
                             ),

@@ -11,7 +11,7 @@ class LinkViewVertical extends StatelessWidget {
   final bool? showMultiMedia;
   final TextOverflow? bodyTextOverflow;
   final int? bodyMaxLines;
-  final double? radius;
+  final double radius;
   final Color? bgColor;
 
   LinkViewVertical({
@@ -27,7 +27,7 @@ class LinkViewVertical extends StatelessWidget {
     this.bodyTextOverflow,
     this.bodyMaxLines,
     this.bgColor,
-    this.radius,
+    this.radius = 0
   }) : super(key: key);
 
   double computeTitleFontSize(double height) {
@@ -80,8 +80,8 @@ class LinkViewVertical extends StatelessWidget {
                                 borderRadius: radius == 0
                                     ? BorderRadius.zero
                                     : BorderRadius.only(
-                                        topLeft: Radius.circular(12),
-                                        topRight: Radius.circular(12),
+                                        topLeft: Radius.circular(radius),
+                                        topRight: Radius.circular(radius),
                                       ),
                                 image: DecorationImage(
                                   image: imageProvider!,
