@@ -314,16 +314,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
   Widget _buildPlaceHolder() {
     return Container(
       padding: widget.padding,
-      child: LayoutBuilder(builder: (context, constraints) {
-        var layoutWidth = constraints.biggest.width;
-        var layoutHeight = constraints.biggest.height;
-
-        return Container(
-          color: widget.backgroundColor,
-          width: layoutWidth,
-          height: layoutHeight,
-        );
-      }),
+      color: widget.backgroundColor,
     );
   }
 
