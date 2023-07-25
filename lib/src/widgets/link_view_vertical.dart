@@ -17,6 +17,7 @@ class LinkViewVertical extends StatelessWidget {
   final EdgeInsets? imagePadding;
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
+  final BoxConstraints? imageConstraints;
 
   LinkViewVertical({
     Key? key,
@@ -35,7 +36,7 @@ class LinkViewVertical extends StatelessWidget {
     this.bodyMaxLines,
     this.titleMaxLines,
     this.bgColor,
-    this.radius = 0
+    this.radius = 0, this.imageConstraints
   }) : super(key: key);
 
   @override
@@ -65,6 +66,7 @@ class LinkViewVertical extends StatelessWidget {
                           ? Container(color: bgColor ?? Colors.grey)
                           : Container(
                               padding: imagePadding,
+                              constraints: imageConstraints,
                               decoration: BoxDecoration(
                                 borderRadius: radius == 0
                                     ? BorderRadius.zero

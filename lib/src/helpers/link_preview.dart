@@ -111,6 +111,7 @@ class AnyLinkPreview extends StatefulWidget {
   final EdgeInsets? imagePadding;
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
+  final BoxConstraints? imageConstraints;
 
   AnyLinkPreview({
     Key? key,
@@ -137,7 +138,7 @@ class AnyLinkPreview extends StatefulWidget {
     this.onTap,
     this.previewHeight,
     this.padding = EdgeInsets.zero,
-    this.urlLaunchMode = LaunchMode.platformDefault, this.imagePadding, this.titlePadding, this.bodyPadding,
+    this.urlLaunchMode = LaunchMode.platformDefault, this.imagePadding, this.titlePadding, this.bodyPadding, this.imageConstraints,
   })  : itemBuilder = null,
         super(key: key);
 
@@ -155,6 +156,7 @@ class AnyLinkPreview extends StatefulWidget {
         imagePadding = null,
         titlePadding = null,
         bodyPadding = null,
+        imageConstraints = null,
         padding = EdgeInsets.zero,
         displayDirection = UIDirection.uiDirectionVertical,
         showMultimedia = true,
@@ -371,6 +373,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
               url: originalLink,
               title: title,
               description: desc,
+              imageConstraints: widget.imageConstraints,
               imageProvider: imageProvider,
               imagePadding: widget.imagePadding,
               titlePadding: widget.titlePadding,
