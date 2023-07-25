@@ -14,6 +14,9 @@ class LinkViewVertical extends StatelessWidget {
   final int? titleMaxLines;
   final double radius;
   final Color? bgColor;
+  final EdgeInsets? imagePadding;
+  final EdgeInsets? titlePadding;
+  final EdgeInsets? bodyPadding;
 
   LinkViewVertical({
     Key? key,
@@ -22,6 +25,9 @@ class LinkViewVertical extends StatelessWidget {
     required this.description,
     required this.imageProvider,
     required this.onTap,
+    this.imagePadding = const EdgeInsets.only(bottom: 15),
+    this.titlePadding = const EdgeInsets.fromLTRB(10, 5, 5, 1),
+    this.bodyPadding = const EdgeInsets.fromLTRB(10, 0, 5, 5),
     this.titleTextStyle,
     this.bodyTextStyle,
     this.showMultiMedia,
@@ -58,7 +64,7 @@ class LinkViewVertical extends StatelessWidget {
                       child: imageProvider == null
                           ? Container(color: bgColor ?? Colors.grey)
                           : Container(
-                              padding: EdgeInsets.only(bottom: 15),
+                              padding: imagePadding,
                               decoration: BoxDecoration(
                                 borderRadius: radius == 0
                                     ? BorderRadius.zero
@@ -83,21 +89,19 @@ class LinkViewVertical extends StatelessWidget {
   }
 
   Widget _buildTitleContainer(TextStyle titleTS_, int? maxLines_) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 5, 5, 1),
-      child: Container(
-        alignment: Alignment(-1.0, -1.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              title,
-              style: titleTS_,
-              overflow: TextOverflow.ellipsis,
-              maxLines: maxLines_,
-            ),
-          ],
-        ),
+    return Container(
+      padding: titlePadding,
+      alignment: Alignment(-1.0, -1.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            title,
+            style: titleTS_,
+            overflow: TextOverflow.ellipsis,
+            maxLines: maxLines_,
+          ),
+        ],
       ),
     );
   }
@@ -105,16 +109,14 @@ class LinkViewVertical extends StatelessWidget {
   Widget _buildBodyContainer(TextStyle bodyTS_, int? maxLines_) {
     return Expanded(
       flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 5, 5),
-        child: Container(
-          alignment: Alignment(-1.0, -1.0),
-          child: Text(
-            description,
-            style: bodyTS_,
-            overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
-            maxLines: bodyMaxLines ?? maxLines_,
-          ),
+      child: Container(
+        padding: bodyPadding,
+        alignment: Alignment(-1.0, -1.0),
+        child: Text(
+          description,
+          style: bodyTS_,
+          overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
+          maxLines: bodyMaxLines ?? maxLines_,
         ),
       ),
     );
