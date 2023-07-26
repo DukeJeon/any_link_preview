@@ -17,7 +17,7 @@ class LinkViewVertical extends StatelessWidget {
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
   final Border? border;
-  final Gradient? gradient;
+  // final Gradient? gradient;
 
   LinkViewVertical({
     Key? key,
@@ -37,7 +37,7 @@ class LinkViewVertical extends StatelessWidget {
     this.titlePadding = const EdgeInsets.fromLTRB(10, 5, 5, 1),
     this.bodyPadding = const EdgeInsets.fromLTRB(10, 0, 5, 5),
     this.border,
-    this.gradient,
+    // this.gradient,
   }) : super(key: key);
 
   double computeTitleFontSize(double height) {
@@ -84,22 +84,27 @@ class LinkViewVertical extends StatelessWidget {
                       child: imageProvider == null
                         ? Container(color: bgColor ?? Colors.grey)
                         : Container(
-                            padding: imagePadding,
-                            decoration: BoxDecoration(
-                              border: border,
-                              gradient: gradient,
-                              borderRadius: radius == 0
-                                  ? BorderRadius.zero
-                                  : BorderRadius.only(
-                                      topLeft: Radius.circular(radius),
-                                      topRight: Radius.circular(radius),
-                                    ),
-                              image: DecorationImage(
-                                image: imageProvider!,
-                                fit: BoxFit.fitWidth,
+                          decoration: BoxDecoration(
+                            border: border,
+                          ),
+                          child: Container(
+                              padding: imagePadding,
+                              decoration: BoxDecoration(
+                                
+                                // gradient: gradient,
+                                borderRadius: radius == 0
+                                    ? BorderRadius.zero
+                                    : BorderRadius.only(
+                                        topLeft: Radius.circular(radius),
+                                        topRight: Radius.circular(radius),
+                                      ),
+                                image: DecorationImage(
+                                  image: imageProvider!,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
-                          ),
+                        ),
                     )
                   : SizedBox(height: 5),
               _buildTitleContainer(
