@@ -61,7 +61,6 @@ class LinkViewVertical extends StatelessWidget {
             children: <Widget>[
               showMultiMedia!
                   ? Expanded(
-                      flex: 2,
                       child: imageProvider == null
                           ? Container(color: bgColor ?? Colors.grey)
                           : Container(
@@ -69,17 +68,23 @@ class LinkViewVertical extends StatelessWidget {
                               constraints: imageConstraints,
                               decoration: BoxDecoration(
                                 borderRadius: radius == 0
-                                    ? BorderRadius.zero
-                                    : BorderRadius.only(
-                                        topLeft: Radius.circular(radius),
-                                        topRight: Radius.circular(radius),
-                                      ),
-                                image: DecorationImage(
+                                  ? BorderRadius.zero
+                                  : BorderRadius.only(
+                                      topLeft: Radius.circular(radius),
+                                      topRight: Radius.circular(radius),
+                                    ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(radius),
+                                  topRight: Radius.circular(radius),
+                                ),
+                                child: Image(
                                   image: imageProvider!,
                                   fit: BoxFit.fitWidth,
                                 ),
                               ),
-                            ),
+                            )
                     )
                   : SizedBox(height: 5),
               _buildTitleContainer(
@@ -109,17 +114,14 @@ class LinkViewVertical extends StatelessWidget {
   }
 
   Widget _buildBodyContainer(TextStyle bodyTS_, int? maxLines_) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        padding: bodyPadding,
-        alignment: Alignment(-1.0, -1.0),
-        child: Text(
-          description,
-          style: bodyTS_,
-          overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
-          maxLines: bodyMaxLines ?? maxLines_,
-        ),
+    return Container(
+      padding: bodyPadding,
+      alignment: Alignment(-1.0, -1.0),
+      child: Text(
+        description,
+        style: bodyTS_,
+        overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
+        maxLines: bodyMaxLines ?? maxLines_,
       ),
     );
   }
