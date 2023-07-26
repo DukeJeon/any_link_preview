@@ -110,6 +110,7 @@ class AnyLinkPreview extends StatefulWidget {
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
   final Border? border;
+  final Gradient? gradient;
 
   AnyLinkPreview({
     Key? key,
@@ -139,6 +140,7 @@ class AnyLinkPreview extends StatefulWidget {
     this.titlePadding,
     this.bodyPadding,
     this.border,
+    this.gradient,
   })  : itemBuilder = null,
         super(key: key);
 
@@ -151,7 +153,8 @@ class AnyLinkPreview extends StatefulWidget {
     this.errorWidget,
     this.proxyUrl,
     this.headers,
-  })  : border = null,
+  })  : gradient = null,
+        border = null,
         imagePadding = null,
         titlePadding = null,
         bodyPadding = null,
@@ -380,6 +383,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
               imagePadding: widget.imagePadding,
               titlePadding: widget.titlePadding,
               bodyPadding: widget.bodyPadding,
+              gradient: widget.gradient,
               title: title,
               description: desc,
               imageProvider: imageProvider,
