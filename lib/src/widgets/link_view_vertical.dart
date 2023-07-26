@@ -96,32 +96,38 @@ class LinkViewVertical extends StatelessWidget {
   }
 
   Widget _buildTitleContainer(TextStyle titleTS_, int? maxLines_) {
-    return Container(
-      padding: titlePadding,
-      alignment: Alignment(-1.0, -1.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            title,
-            style: titleTS_,
-            overflow: TextOverflow.ellipsis,
-            maxLines: maxLines_,
-          ),
-        ],
+    return Visibility(
+      visible: title.isNotEmpty,
+      child: Container(
+        padding: titlePadding,
+        alignment: Alignment(-1.0, -1.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              title,
+              style: titleTS_,
+              overflow: TextOverflow.ellipsis,
+              maxLines: maxLines_,
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildBodyContainer(TextStyle bodyTS_, int? maxLines_) {
-    return Container(
-      padding: bodyPadding,
-      alignment: Alignment(-1.0, -1.0),
-      child: Text(
-        description,
-        style: bodyTS_,
-        overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
-        maxLines: bodyMaxLines ?? maxLines_,
+    return Visibility(
+      visible: description.isNotEmpty,
+      child: Container(
+        padding: bodyPadding,
+        alignment: Alignment(-1.0, -1.0),
+        child: Text(
+          description,
+          style: bodyTS_,
+          overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
+          maxLines: bodyMaxLines ?? maxLines_,
+        ),
       ),
     );
   }
