@@ -88,22 +88,21 @@ class LinkViewVertical extends StatelessWidget {
                             border: border,
                           ),
                           child: Container(
-                              padding: imagePadding,
-                              decoration: BoxDecoration(
-                                
-                                // gradient: gradient,
-                                borderRadius: radius == 0
-                                    ? BorderRadius.zero
-                                    : BorderRadius.only(
-                                        topLeft: Radius.circular(radius),
-                                        topRight: Radius.circular(radius),
-                                      ),
-                                image: DecorationImage(
-                                  image: imageProvider!,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            padding: imagePadding,
+                            decoration: BoxDecoration(
+                              // gradient: gradient,
+                              borderRadius: radius == 0
+                                  ? BorderRadius.zero
+                                  : BorderRadius.only(
+                                      topLeft: Radius.circular(radius),
+                                      topRight: Radius.circular(radius),
+                                    ),
+                              image: DecorationImage(
+                                image: imageProvider!,
+                                fit: BoxFit.cover,
                               ),
                             ),
+                          ),
                         ),
                     )
                   : SizedBox(height: 5),
