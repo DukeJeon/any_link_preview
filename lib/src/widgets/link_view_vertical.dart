@@ -16,6 +16,7 @@ class LinkViewVertical extends StatelessWidget {
   final EdgeInsets? imagePadding;
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
+  final Border? border;
 
   LinkViewVertical({
     Key? key,
@@ -34,6 +35,7 @@ class LinkViewVertical extends StatelessWidget {
     this.imagePadding = const EdgeInsets.only(bottom: 15),
     this.titlePadding = const EdgeInsets.fromLTRB(10, 5, 5, 1),
     this.bodyPadding = const EdgeInsets.fromLTRB(10, 0, 5, 5),
+    this.border,
   }) : super(key: key);
 
   double computeTitleFontSize(double height) {
@@ -82,6 +84,7 @@ class LinkViewVertical extends StatelessWidget {
                         : Container(
                             padding: imagePadding,
                             decoration: BoxDecoration(
+                              border: border,
                               borderRadius: radius == 0
                                   ? BorderRadius.zero
                                   : BorderRadius.only(

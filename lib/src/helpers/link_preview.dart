@@ -109,6 +109,7 @@ class AnyLinkPreview extends StatefulWidget {
   final EdgeInsets? imagePadding;
   final EdgeInsets? titlePadding;
   final EdgeInsets? bodyPadding;
+  final Border? border;
 
   AnyLinkPreview({
     Key? key,
@@ -137,6 +138,7 @@ class AnyLinkPreview extends StatefulWidget {
     this.imagePadding,
     this.titlePadding,
     this.bodyPadding,
+    this.border,
   })  : itemBuilder = null,
         super(key: key);
 
@@ -149,7 +151,8 @@ class AnyLinkPreview extends StatefulWidget {
     this.errorWidget,
     this.proxyUrl,
     this.headers,
-  })  : imagePadding = null,
+  })  : border = null,
+        imagePadding = null,
         titlePadding = null,
         bodyPadding = null,
         titleStyle = null,
@@ -388,6 +391,7 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
               showMultiMedia: widget.showMultimedia,
               bgColor: widget.backgroundColor,
               radius: widget.borderRadius ?? 12,
+              border: widget.border,
             ),
     );
   }
