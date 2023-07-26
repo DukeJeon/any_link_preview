@@ -106,6 +106,10 @@ class AnyLinkPreview extends StatefulWidget {
   /// allows to build a custom [Widget] from the [Metadata] and [ImageProvider] fetched
   final Widget Function(BuildContext, Metadata, ImageProvider?)? itemBuilder;
 
+  final EdgeInsets? imagePadding;
+  final EdgeInsets? titlePadding;
+  final EdgeInsets? bodyPadding;
+
   AnyLinkPreview({
     Key? key,
     required this.link,
@@ -130,6 +134,9 @@ class AnyLinkPreview extends StatefulWidget {
     this.onTap,
     this.previewHeight,
     this.urlLaunchMode = LaunchMode.platformDefault,
+    this.imagePadding,
+    this.titlePadding,
+    this.bodyPadding,
   })  : itemBuilder = null,
         super(key: key);
 
@@ -142,7 +149,10 @@ class AnyLinkPreview extends StatefulWidget {
     this.errorWidget,
     this.proxyUrl,
     this.headers,
-  })  : titleStyle = null,
+  })  : imagePadding = null,
+        titlePadding = null,
+        bodyPadding = null,
+        titleStyle = null,
         bodyStyle = null,
         displayDirection = UIDirection.uiDirectionVertical,
         showMultimedia = true,
@@ -364,6 +374,9 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
           : LinkViewVertical(
               key: widget.key ?? Key(originalLink.toString()),
               url: originalLink,
+              imagePadding: widget.imagePadding,
+              titlePadding: widget.titlePadding,
+              bodyPadding: widget.bodyPadding,
               title: title,
               description: desc,
               imageProvider: imageProvider,

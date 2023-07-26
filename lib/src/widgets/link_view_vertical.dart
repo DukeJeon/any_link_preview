@@ -13,6 +13,9 @@ class LinkViewVertical extends StatelessWidget {
   final int? bodyMaxLines;
   final double radius;
   final Color? bgColor;
+  final EdgeInsets? imagePadding;
+  final EdgeInsets? titlePadding;
+  final EdgeInsets? bodyPadding;
 
   LinkViewVertical({
     Key? key,
@@ -27,7 +30,10 @@ class LinkViewVertical extends StatelessWidget {
     this.bodyTextOverflow,
     this.bodyMaxLines,
     this.bgColor,
-    this.radius = 0
+    this.radius = 0,
+    this.imagePadding = const EdgeInsets.only(bottom: 15),
+    this.titlePadding = const EdgeInsets.fromLTRB(10, 5, 5, 1),
+    this.bodyPadding = const EdgeInsets.fromLTRB(10, 0, 5, 5),
   }) : super(key: key);
 
   double computeTitleFontSize(double height) {
@@ -71,24 +77,23 @@ class LinkViewVertical extends StatelessWidget {
             children: <Widget>[
               showMultiMedia!
                   ? Expanded(
-                      flex: 2,
                       child: imageProvider == null
-                          ? Container(color: bgColor ?? Colors.grey)
-                          : Container(
-                              padding: EdgeInsets.only(bottom: 15),
-                              decoration: BoxDecoration(
-                                borderRadius: radius == 0
-                                    ? BorderRadius.zero
-                                    : BorderRadius.only(
-                                        topLeft: Radius.circular(radius),
-                                        topRight: Radius.circular(radius),
-                                      ),
-                                image: DecorationImage(
-                                  image: imageProvider!,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                        ? Container(color: bgColor ?? Colors.grey)
+                        : Container(
+                            padding: imagePadding,
+                            decoration: BoxDecoration(
+                              borderRadius: radius == 0
+                                  ? BorderRadius.zero
+                                  : BorderRadius.only(
+                                      topLeft: Radius.circular(radius),
+                                      topRight: Radius.circular(radius),
+                                    ),
+                              image: DecorationImage(
+                                image: imageProvider!,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
+                          ),
                     )
                   : SizedBox(height: 5),
               _buildTitleContainer(
@@ -100,9 +105,10 @@ class LinkViewVertical extends StatelessWidget {
   }
 
   Widget _buildTitleContainer(TextStyle titleTS_, int? maxLines_) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 5, 5, 1),
+    return Visibility(
+      visible: title.isNotEmpty,
       child: Container(
+        padding: titlePadding,
         alignment: Alignment(-1.0, -1.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,18 +126,16 @@ class LinkViewVertical extends StatelessWidget {
   }
 
   Widget _buildBodyContainer(TextStyle bodyTS_, int? maxLines_) {
-    return Expanded(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 5, 5),
-        child: Container(
-          alignment: Alignment(-1.0, -1.0),
-          child: Text(
-            description,
-            style: bodyTS_,
-            overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
-            maxLines: bodyMaxLines ?? maxLines_,
-          ),
+    return Visibility(
+      visible: description.isNotEmpty,
+      child: Container(
+        padding: bodyPadding,
+        alignment: Alignment(-1.0, -1.0),
+        child: Text(
+          description,
+          style: bodyTS_,
+          overflow: bodyTextOverflow ?? TextOverflow.ellipsis,
+          maxLines: bodyMaxLines ?? maxLines_,
         ),
       ),
     );
